@@ -98,6 +98,9 @@ This experiment will help provide a full report with comparable data points so t
 3. Lambda < 0.01 will correspond to the second hypothesis, wherein, lowering the MI regularisation weight is expected to reduce interference with the BERT pretraining architecture and improve performance. Therefore lambda == 0.001 ought to produce better results (compared to cases 1 and 2).
 4. In general, if MI with InfoNCE were a viable paradigm on BERT, performance will peak at the optimal lambda (this could be 0.01 but is expected to be <) and degrade on either side.
 
+**Results**
+
+![results](infonce_lambda_plots.png)
 **Discussion:**
 
 A λ sweep reveals that InfoNCE does not admit an optimal operating regime on BERT. At λ = 0.01, InfoNCE shows a −1.47% drop in accuracy and a +1.60% increase in contradiction relative to baseline, consistent with the largely negative results observed for CKA and Cosine. While λ = 0.01 performs best among the tested values, it still fails to match baseline. Lowering regularisation strength to λ = 0.001 does not recover performance, though it is less harmful than larger values. As λ increases further, both accuracy and consistency degrade sharply, with λ = 0.1 resulting in complete logical collapse. Overall, these results indicate that InfoNCE-based inter-layer decorrelation is not a tunable inductive bias for BERT — it is fundamentally misaligned with its pretrained representation structure.
